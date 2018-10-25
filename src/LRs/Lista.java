@@ -1,62 +1,44 @@
 package LRs;
 
 public class Lista {
-    private int out;
-    private int in;
-    private char enl;
-    private Lista sig;
 
-    //Constructores
-    public Lista(int out, int in, char enl, Lista sig){
-        this.out = out;
-        this.in = in;
-        this.enl = enl;
-        this.sig = sig;
-    }
+    private boolean[] clausura;
+    private AFND[] direcciones;
+    private Lista siguiente;
 
-    public Lista(int out, int in, char enl){
-        this(out, in, enl, null);
-    }
-
-    public Lista(int out, int in){
-        this(out, in, (char) 949, null);
-    }
-
-    public Lista(){
-        this(0,0,(char) 949,null);
-    }
-
-    //Getters
-    public Lista siguiente(){
-        return sig;
-    }
-
-    //Metodos
-    public static String aString(Lista L){
-        if(L == null) return "";
-        String s = L.out + " - " + L.enl + " -> " + L.in + "\n" + aString(L.sig);
-        return s;
+    public Lista(boolean[] C, AFND[] D){
+        clausura = C;
+        direcciones = D;
+        siguiente = null;
     }
 
     public void append(Lista L){
-        if(sig == null) sig = L;
-        else sig.append(L);
+        if(siguiente == null) siguiente = L;
+        else siguiente.append(L);
     }
 
-    public static void aLista(AFND A, Lista L){
-        if(A.esFinal() || A.visitado()) return;
-        A.visitar();
-        AFND Ae = A.epsilon();
-        if(Ae != null){
-            Lista L1 = new Lista(A.getId(), Ae.getId());
-            L.append(L1);
-            aLista(Ae,L);
+    public static Lista aLista(AFND[][] M, int n){
+        boolean[] c = new boolean[n];
+        Lista L = new Lista(AFND.clausura(M[0][0],c), M[0]);
+        for(int i=1; i<n; i++){
+            c = new boolean[n];
+            Lista nL = new Lista(AFND.clausura(M[i][0],c), M[i]);
+            L.append(nL);
         }
-        AFND As = A.siguiente();
-        if(As != null){
-            Lista L1 = new Lista(A.getId(), As.getId(), A.enlace());
-            L.append(L1);
-            aLista(As,L);
+        return L;
+    }
+
+    public static String aString(Lista L){
+        return aString(L.direcciones) + '\n' + aString(L.siguiente);
+    }
+
+    public static String aString(AFND[] A){
+        int n = A.length;
+        String s = "";
+        for(int i=1; i<n; i++){
+            if(A[i] == null) s += (char) 237 + ",";
+            else s += A[i].getId() + ",";
         }
+        return s;
     }
 }

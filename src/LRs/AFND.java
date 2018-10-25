@@ -130,7 +130,7 @@ public class AFND {
             B[A.e.id] = true;
             B = clausura(A.e, B);
         }
-        if(A.l == (char) 949){
+        if(A.l == (char) 949 && A.s != null){
             B[A.s.id] = true;
             B = clausura(A.s,B);
         }
@@ -142,16 +142,19 @@ public class AFND {
         if(A.l != (char) 949){
             M[A.id][(int) A.l -9] = A.s;
         }
-        if(A.e != null) M = rellenar(A.e, M);
-        if(A.s != null) M = rellenar(A.s, M);
+        else{
+            if(A.e != null) M = rellenar(A.e, M);
+            if(A.s != null) M = rellenar(A.s, M);
+        }
         return M;
     }
 
+    /*
     public static boolean[][] clausuras(AFND[][] M, int n){
         boolean[][] C = new boolean[n][n];
         for(int i=0; i<n; i++){
             C[i] = clausura(M[i][0], C[i]);
         }
         return C;
-    }
+    }*/
 }

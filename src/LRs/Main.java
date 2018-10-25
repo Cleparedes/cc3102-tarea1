@@ -1,8 +1,5 @@
 package LRs;
 
-import java.util.Scanner;
-import java.io.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -14,11 +11,8 @@ public class Main {
         int n = A0.getN();
         AFND[][] M = AFD.mapa(n);
         M = AFND.rellenar(A0, M);
-        boolean[][] C = AFND.clausuras(M, n);
-
-        Lista L = new Lista();
-        Lista.aLista(A0,L);
-        System.out.println(Lista.aString(L.siguiente()));
+        Lista L = Lista.aLista(M, n);
+        System.out.println(Lista.aString(L));
 
         /*
         Scanner s = new Scanner(System.in);
