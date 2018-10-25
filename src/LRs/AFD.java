@@ -31,7 +31,7 @@ public class AFD {
     }
 
     public static AFND[][] mapa(int k){
-        AFND[][] M = new AFND[k+1][114];
+        AFND[][] M = new AFND[k][114];
         return M;
     }
 }

@@ -125,6 +125,7 @@ public class AFND {
     }
 
     public static boolean[] clausura(AFND A, boolean[] B){
+        if(A == null) return B;
         B[A.id] = true;
         if(A.e != null){
             B[A.e.id] = true;
@@ -138,14 +139,13 @@ public class AFND {
     }
 
     public static AFND[][] rellenar(AFND A, AFND[][] M){
-        M[A.id][0] = A;
+        if(M[A.id][0] == null) M[A.id][0] = A;
+        else return M;
         if(A.l != (char) 949){
             M[A.id][(int) A.l -9] = A.s;
         }
-        else{
-            if(A.e != null) M = rellenar(A.e, M);
-            if(A.s != null) M = rellenar(A.s, M);
-        }
+        if(A.e != null) M = rellenar(A.e, M);
+        if(A.s != null) M = rellenar(A.s, M);
         return M;
     }
 

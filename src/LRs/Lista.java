@@ -29,6 +29,7 @@ public class Lista {
     }
 
     public static String aString(Lista L){
+        if(L == null) return "";
         return aString(L.direcciones) + '\n' + aString(L.siguiente);
     }
 
@@ -36,8 +37,8 @@ public class Lista {
         int n = A.length;
         String s = "";
         for(int i=1; i<n; i++){
-            if(A[i] == null) s += (char) 237 + ",";
-            else s += A[i].getId() + ",";
+            if(A[i] == null) s += (char) 8709 + "|";
+            else s += A[i].getId() + "|";
         }
         return s;
     }
