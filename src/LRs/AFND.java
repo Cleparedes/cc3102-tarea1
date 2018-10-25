@@ -123,4 +123,35 @@ public class AFND {
             }
         }
     }
+
+    public static boolean[] clausura(AFND A, boolean[] B){
+        B[A.id] = true;
+        if(A.e != null){
+            B[A.e.id] = true;
+            B = clausura(A.e, B);
+        }
+        if(A.l == (char) 949){
+            B[A.s.id] = true;
+            B = clausura(A.s,B);
+        }
+        return B;
+    }
+
+    public static AFND[][] rellenar(AFND A, AFND[][] M){
+        M[A.id][0] = A;
+        if(A.l != (char) 949){
+            M[A.id][(int) A.l -9] = A.s;
+        }
+        if(A.e != null) M = rellenar(A.e, M);
+        if(A.s != null) M = rellenar(A.s, M);
+        return M;
+    }
+
+    public static boolean[][] clausuras(AFND[][] M, int n){
+        boolean[][] C = new boolean[n][n];
+        for(int i=0; i<n; i++){
+            C[i] = clausura(M[i][0], C[i]);
+        }
+        return C;
+    }
 }

@@ -11,6 +11,11 @@ public class Main {
         AFND A1 = new AFND(1, true);   //Nodo final
         A0.setN(2);
         A0.thompson(A0, A1);
+        int n = A0.getN();
+        AFND[][] M = AFD.mapa(n);
+        M = AFND.rellenar(A0, M);
+        boolean[][] C = AFND.clausuras(M, n);
+
         Lista L = new Lista();
         Lista.aLista(A0,L);
         System.out.println(Lista.aString(L.siguiente()));
