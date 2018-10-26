@@ -17,6 +17,18 @@ public class Lista {
         else siguiente.append(L);
     }
 
+    public boolean esIgual(boolean[] B0, boolean[] B1){
+        int n = B0.length;
+        for(int i=0; i<n; i++){
+            if (B0[i] != B1[i]) return false;
+        }
+        return true;
+    }
+
+    public void llegada(Lista L, boolean[] B){
+
+    }
+
     public static Lista aLista(AFND[][] M, int n){
         boolean[] c = new boolean[n];
         Lista L = new Lista(AFND.clausura(M[0][0],c), M[0]);
