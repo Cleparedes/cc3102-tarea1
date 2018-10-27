@@ -12,7 +12,14 @@ public class Main {
         AFND[][] M = AFD.mapa(n);
         M = AFND.rellenar(A0, M);
         Lista L = Lista.aLista(M, n);
-        System.out.println(Lista.aString(L));
+        Lista Lm = L;
+        while(L != null){
+            boolean[] B = new boolean[n];
+            Lista.llegada(L, B, M);
+            L = L.siguiente();
+        }
+        //System.out.println(Lista.aString(Lm));
+        System.out.println(M);
 
         /*
         Scanner s = new Scanner(System.in);
